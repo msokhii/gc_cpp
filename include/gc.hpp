@@ -41,6 +41,8 @@ public:
         sweep();
     }
 
+    void mark_object(GCObject* object);
+
     ~GC();
 private:
     std::vector<GCObject*> objects;

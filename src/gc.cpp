@@ -1,7 +1,7 @@
 #include "gc.hpp"
 
 void GC::mark(){
-    for(GCObject* root: roots){ root->marked = true; }
+    for(GCObject* root: roots){ mark_object(root); }
 }
 
 void GC::sweep(){
@@ -18,6 +18,13 @@ void GC::sweep(){
             ++it;
         }
     }
+}
+
+void GC::mark_object(GCObject* object){
+    if(object == nullptr){ return; }
+    if(object->marked){ return; }
+    object->marked=true;
+    object->trace(*this);
 }
 
 GC::~GC(){
