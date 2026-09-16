@@ -13,6 +13,7 @@ void GC::sweep(){
         if(!object->marked){
             delete object;
             it = objects.erase(it);
+            obj_Collect+=1;
         } else {
             object->marked=false;
             ++it;

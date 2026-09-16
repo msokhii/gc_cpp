@@ -1,4 +1,5 @@
 #include "gc.hpp"
+#include "gc_root.hpp"
 
 #include<iostream>
 #include<string>
@@ -43,36 +44,33 @@ int main(){
     Node* b = new Node("B");
     Node* c = new Node("C");
     Node* d = new Node("D");
-
+    
     gc.track(a);
     gc.track(b);
     gc.track(c);
     gc.track(d);
-
+    
     a->set_next(b);
     b->set_next(c);
-    c->set_next(d);
-    d->set_next(a);
+
+    {
+        GCRoot root(gc,a);
+
+        std::cout<<"Total objects managed -> "<<gc.object_count()<<'\n';
+        std::cout<<"Before running collections -> "<<gc.get_Collect()<<'\n';
+
+        gc.collect();
+
+        std::cout<<"After running collections once -> "<<gc.get_Collect()<<'\n';
+        std::cout<<"Total objects managed -> "<<gc.object_count()<<'\n';
+        std::cout<<"Total objects collected -> "<<gc.get_Obj_Collect()<<'\n';
+    }
+
+    gc.collect();
+
+    std::cout<<"After running collections once -> "<<gc.get_Collect()<<'\n';
+    std::cout<<"Total objects managed -> "<<gc.object_count()<<'\n';
+    std::cout<<"Total objects collected -> "<<gc.get_Obj_Collect()<<'\n';
     
-    gc.add_root(a);
-
-    std::cout<<"Before running gc: \n"
-             <<"Objects -> "<<gc.object_count()<<'\n'
-             <<"Root -> "<<gc.root_count()<<'\n';
-
-    gc.collect();
-
-    std::cout<<"After running gc: \n"
-             <<"Objects -> "<<gc.object_count()<<'\n'
-             <<"Roots -> "<<gc.root_count()<<'\n';
-
-    gc.remove_root(a);
-
-    gc.collect();
-
-    std::cout<<"After running gc: \n"
-             <<"Objects -> "<<gc.object_count()<<'\n'
-             <<"Roots -> "<<gc.root_count()<<'\n';
-             
     return 0;
 }

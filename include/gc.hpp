@@ -39,9 +39,18 @@ public:
     void collect(){
         mark();
         sweep();
+        total_Collect++;
     }
 
     void mark_object(GCObject* object);
+
+    std::size_t get_Collect(){
+        return total_Collect;
+    }
+
+    std::size_t get_Obj_Collect(){
+        return obj_Collect;
+    }
 
     ~GC();
 private:
@@ -49,6 +58,8 @@ private:
     std::vector<GCObject*> roots;
     void mark();
     void sweep();
+    std::size_t total_Collect=0;
+    std::size_t obj_Collect=0;
 };
 
 #endif
