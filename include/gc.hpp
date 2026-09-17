@@ -8,6 +8,7 @@
 
 class GC{
 public:
+    
     void track(GCObject* object){
         if(object == nullptr){ return; }
         objects.push_back(object);
@@ -42,6 +43,13 @@ public:
         total_Collect++;
     }
 
+    void maybe_collect(){
+        if(objects.size()>=threshold){
+            collect();
+            threshold=std::max(min_T,2*objects.size());
+        }
+    }
+
     void mark_object(GCObject* object);
 
     std::size_t get_Collect(){
@@ -52,6 +60,10 @@ public:
         return obj_Collect;
     }
 
+    std::size_t get_Threshold(){
+        return threshold;
+    }
+
     ~GC();
 private:
     std::vector<GCObject*> objects;
@@ -60,6 +72,8 @@ private:
     void sweep();
     std::size_t total_Collect=0;
     std::size_t obj_Collect=0;
+    std::size_t min_T=3;
+    std::size_t threshold=min_T;
 };
 
 #endif
