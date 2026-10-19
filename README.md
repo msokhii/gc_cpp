@@ -11,7 +11,7 @@ Imagine, you have some garbage objects, say a bunch of Nodes (A,B and C). Suppos
 
 ### Mark Phase:
 
-The GC starts from the root (A) and then recursively traces the nodes usingDepth-First Search (DFS). Each reachable object is marked as True and previously marked objects are skipped to prevent infinite recursion. 
+The GC starts from the root (A) and then recursively traces the nodes using Depth-First Search (DFS). Each reachable object is marked as True and previously marked objects are skipped to prevent infinite recursion. 
 
 ### Swap Phase: 
 
