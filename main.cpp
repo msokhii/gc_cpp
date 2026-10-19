@@ -19,5 +19,9 @@ int main(){
     gc.track(C);
 
     gc.add_Root(A);
+
+    gc.mark(A);
+    gc.sweep();
+    
     return 0;
 }

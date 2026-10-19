@@ -2,6 +2,7 @@
 #define NODE_HPP
 
 #include"gc_Obj.hpp"
+#include"GC.hpp"
 
 class Node:public gc_Obj{
     public:
@@ -9,6 +10,7 @@ class Node:public gc_Obj{
         Node(char name_);
         void set_Left_Node(Node* node);
         void set_Right_Node(Node* node);
+        void trace(GC& gc) override;
         ~Node();
     private:
         char node_Name_='A';

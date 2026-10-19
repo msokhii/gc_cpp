@@ -12,4 +12,6 @@ void gc_Obj::unmark(){
     marked_=true;
 }
 
+void gc_Obj::trace(GC& gc){ };
+
 gc_Obj::~gc_Obj()=default;

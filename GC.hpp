@@ -11,6 +11,8 @@ class GC{
         void track(gc_Obj* obj_);
         void add_Root(gc_Obj* obj_);
         void remove_Root(gc_Obj* obj_);
+        void mark(gc_Obj* obj_);
+        void sweep();
         ~GC();
     private:
         std::vector<gc_Obj*> objects_;
