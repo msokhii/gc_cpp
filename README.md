@@ -1,7 +1,7 @@
-# Mark & Sweep Garbage Collector (CPP)
+# Mark & Sweep Garbage Collector
 
 This repository contains a basic implementation of the mark and sweep 
-algorithm coded in CPP-20. We have a garbage collector that manages 
+algorithm coded in C++20. We have a garbage collector that manages 
 dynamically allocated objects. It tracks these objects through its 
 respective roots and reclaims memory occupied by unreachable objects.
 
